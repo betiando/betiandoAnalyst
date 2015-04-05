@@ -37,6 +37,8 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'bootstrap3',
+    'analyst',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -100,3 +102,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
+
+#BOOTSTRAP
+BOOTSTRAP3 = {
+	# Include jQuery with Bootstrap JavaScript (affects django-bootstrap3 template tags)
+	'include_jquery': True,
+}
