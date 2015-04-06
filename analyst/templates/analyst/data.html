@@ -25,11 +25,27 @@
 			  <tr>
 				<th>ID</th>
 				<th>Name</th>
-				<th>Entries</th>
+				<th>Content</th>
 				<th>Added</th>
+				<th></th>
 			  </tr>
 		  </thead>
 		  <tbody>
+			{% for item in datasets %}
+					<tr>
+						<td>{{ item.id }}</td>
+						<td>{{ item.name }}</td>
+						<td>Show header | <a href="{% url 'dataallentries' item.id %}">Show all entries</a></td>
+						<td>{{ item.created }}</td>
+						<td>
+							<form method="post" action="">
+							{% csrf_token %}
+							<input type="hidden" name="deleteid" value="{{item.id}}"/>
+							<input type="submit" class="btn btn-danger" value="Delete Dataset"/>
+							</form>
+						</td>
+					</tr>
+			{% endfor %}	
 		  </tbody>
 		</table>
 	  </div>
@@ -45,7 +61,14 @@
     </div>
     <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
       <div class="panel-body">
-        Form
+		  {% load bootstrap3 %}
+		  {% bootstrap_form_errors form %}
+        <form method="post" class="form" action="" enctype="multipart/form-data">
+			{% csrf_token %}
+			{% bootstrap_form form %}
+			<input type="hidden" name="deleteid" value="0"/>
+			<input type="submit" value="Import Data" />
+		</form>
       </div>
     </div>
   </div>
